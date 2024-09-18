@@ -12,13 +12,31 @@ def get_users():
     response = requests.get(BASE_URL + 'users')
     return response.json()
 
+def update_user(user_id, name=None, email=None):
+    data = {}
+    if name:
+        data['name'] = name
+    if email:
+        data['email'] = email
+    response = requests.put(BASE_URL + f'users/{user_id}', json=data)
+    return response.json()
+
+def delete_user(user_id):
+    response = requests.delete(BASE_URL + f'users/{user_id}')
+    return response.json()
 
 # for example
 if __name__ == '__main__':
-    # Создаем пользователя
-    user = create_user('John Doe', 'john@example.com')
+    user = create_user('Takhmina', 'tt@example.com')
     print("Created user:", user)
 
-    # Получаем всех пользователей
     users = get_users()
     print("All users:", users)
+
+    if users:
+        user_id = users[0]['id']
+        updated = update_user(user_id, name='John Smith')
+        print("Updated user:", updated)
+
+        deleted = delete_user(user_id)
+        print("Deleted user:", deleted)
