@@ -11,3 +11,9 @@ postman:
 
 for getting all users:
 curl http://127.0.0.1:5000/users
+
+for update user:
+curl -X PUT http://127.0.0.1:5000/users/9 \ -H "Content-Type: application/json" \ -d "{\"name\": \"Saule Anarova\"}"
+
+for delete user:
+curl -X DELETE http://127.0.0.1:5000/users/9
